@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dépôt de sécurité - La Maison Blanche</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        :root {
+            --gray-light: #f8f9fa;
+            --gray-medium: #6c757d;
+            --gray-dark: #343a40;
+            --blue-primary: #007bff;
+            --blue-hover: #0056b3;
+            --border-color: #ced4da;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--gray-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--gray-dark);
+        }
+        .checkout-container {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .info-panel {
+            flex: 1;
+            padding: 40px;
+            background-color: #f7f7f7;
+            border-right: 1px solid #e0e0e0;
+        }
+        .info-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .info-header svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            color: var(--gray-medium);
+        }
+        .info-header span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0 0 8px 0;
+        }
+        .amount {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .description {
+            font-size: 0.95rem;
+            color: var(--gray-medium);
+            line-height: 1.5;
+        }
+        .payment-panel {
+            flex: 1.2;
+            padding: 40px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--blue-primary);
+            box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
+        }
+        #payment-element {
+            margin-bottom: 24px;
+        }
+        .terms {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .terms input {
+            width: auto;
+            margin-right: 10px;
+        }
+        .terms label {
+            font-size: 0.85rem;
+            color: var(--gray-medium);
+            margin-bottom: 0;
+        }
+        .terms a {
+            color: var(--blue-primary);
+            text-decoration: none;
+        }
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--blue-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: var(--blue-hover);
+        }
+        button:disabled {
+            background-color: #a0c7ff;
+            cursor: not-allowed;
+        }
+        .stripe-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--gray-medium);
+        }
+        #payment-message {
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #D8000C; /* Red for errors */
+            background-color: #FFD2D2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-container">
+        <div class="info-panel">
+            <div class="info-header">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" />
+                </svg>
+                <span>La Maison Blanche</span>
+            </div>
+            <h1>Dépôt de sécurité</h1>
+            <div class="amount">CA$500.00</div>
+            <p class="description">
+                Votre dépôt de sécurité vous sera remboursé 5 jours après votre séjour, suite à l'inspection du logement. Voir les conditions plus bas.
+            </p>
+        </div>
+
+        <div class="payment-panel">
+            <form id="payment-form">
+                <div class="form-group">
+                    <label for="email">Contact details</label>
+                    <input type="email" id="email" placeholder="email@example.com" required>
+                    <input type="text" id="name" placeholder="Full name" style="margin-top: 10px;" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="reservation-number">N° de réservation</label>
+                    <input type="text" id="reservation-number" placeholder="Doit contenir 8 caractères" minlength="8" maxlength="8" required>
+                </div>
+
+                <label>Payment method</label>
+                <div id="payment-element">
+                    </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to La Maison Blanche's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <button id="submit">
+                    <span id="button-text">Pay</span>
+                </button>
+
+                <div id="payment-message" class="hidden"></div>
+            </form>
+            <div class="stripe-footer">Powered by <strong>stripe</strong> | Terms | Privacy</div>
+        </div>
+    </div>
+
+    <script>
+        // IMPORTANT: Replace with your actual API Gateway URL
+        const BACKEND_URL = 'https://4wusuyt7he.execute-api.us-east-2.amazonaws.com'; 
+
+        // 1. Initialize Stripe
+        const stripe = Stripe('pk_live_51SEYMBAA2CcQXqlz15YdWYTYmQurzgda37b3QcV2IHddJxUIy9UG0UPW61pDfiaXNaaPymKR7rStg2B1cQInT1Rj00CVDBnZMN');
+
+        // 2. Create Payment Elements
+        let elements;
+        initialize();
+
+        document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
+
+        // Fetches a payment intent and captures the client secret
+        async function initialize() {
+            const response = await fetch(BACKEND_URL + '/create-payment-intent', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    // You can pass items or other data here if needed
+                }),
+            });
+            const { clientSecret } = await response.json();
+
+            const appearance = { theme: 'stripe' };
+            elements = stripe.elements({ appearance, clientSecret });
+            
+            const paymentElement = elements.create("payment");
+            paymentElement.mount("#payment-element");
+        }
+
+        // 3. Handle form submission
+        async function handleSubmit(e) {
+            e.preventDefault();
+            setLoading(true);
+
+            const { error } = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    // Make sure to change this to your payment completion page
+                    return_url: window.location.href.split('?')[0] + 'completion.html',
+                    receipt_email: document.getElementById('email').value,
+                },
+            });
+
+            // This point will only be reached if there is an immediate error when
+            // confirming the payment. Otherwise, your customer will be redirected to
+            // your `return_url`.
+            if (error.type === "card_error" || error.type === "validation_error") {
+                showMessage(error.message);
+            } else {
+                showMessage("An unexpected error occurred.");
+            }
+            setLoading(false);
+        }
+
+        // --- UI helpers ---
+        function showMessage(messageText) {
+            const messageContainer = document.querySelector("#payment-message");
+            messageContainer.classList.remove("hidden");
+            messageContainer.textContent = messageText;
+            setTimeout(() => {
+                messageContainer.classList.add("hidden");
+                messageContainer.textContent = "";
+            }, 4000);
+        }
+
+        function setLoading(isLoading) {
+            document.querySelector("#submit").disabled = isLoading;
+            document.querySelector("#button-text").textContent = isLoading ? "Processing..." : "Pay";
+        }
+    </script>
+</body>
+</html>
