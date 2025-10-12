@@ -7,156 +7,68 @@
     <script src="https://js.stripe.com/v3/"></script>
     <style>
         :root {
-            --gray-light: #f8f9fa;
-            --gray-medium: #6c757d;
-            --gray-dark: #343a40;
-            --blue-primary: #007bff;
-            --blue-hover: #0056b3;
-            --border-color: #ced4da;
+            --gray-light: #f8f9fa; --gray-medium: #6c757d; --gray-dark: #343a40;
+            --blue-primary: #007bff; --blue-hover: #0056b3; --border-color: #ced4da;
             --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --red-warning-bg: #fffbe6; --red-warning-border: #ffe58f; --red-warning-text: #d46b08;
         }
         body {
-            font-family: var(--font-family);
-            background-color: var(--gray-light);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            color: var(--gray-dark);
+            font-family: var(--font-family); background-color: var(--gray-light); display: flex;
+            justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: var(--gray-dark);
         }
         .checkout-container {
-            display: flex;
-            width: 100%;
-            max-width: 900px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            overflow: hidden;
+            display: flex; width: 100%; max-width: 900px; background-color: white;
+            border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); overflow: hidden;
         }
-        .info-panel {
-            flex: 1;
-            padding: 40px;
-            background-color: #f7f7f7;
-            border-right: 1px solid #e0e0e0;
+        .info-panel { flex: 1; padding: 40px; background-color: #f7f7f7; border-right: 1px solid #e0e0e0; }
+        .info-header { display: flex; align-items: center; margin-bottom: 30px; }
+        .info-header svg { width: 24px; height: 24px; margin-right: 12px; color: var(--gray-medium); }
+        .info-header span { font-size: 1.1rem; font-weight: 500; }
+        h1 { font-size: 1.2rem; font-weight: 500; margin: 0 0 8px 0; }
+        .amount { font-size: 2.5rem; font-weight: 600; margin-bottom: 16px; }
+        .description { font-size: 0.95rem; color: var(--gray-medium); line-height: 1.5; }
+        .payment-panel { flex: 1.2; padding: 40px; }
+        form { display: flex; flex-direction: column; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 6px; }
+        
+        .input-with-icon { position: relative; }
+        .input-with-icon svg {
+            position: absolute; left: 12px; top: 50%;
+            transform: translateY(-50%); width: 20px; height: 20px; color: #888;
         }
-        .info-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .info-header svg {
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            color: var(--gray-medium);
-        }
-        .info-header span {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-        h1 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin: 0 0 8px 0;
-        }
-        .amount {
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        .description {
-            font-size: 0.95rem;
-            color: var(--gray-medium);
-            line-height: 1.5;
-        }
-        .payment-panel {
-            flex: 1.2;
-            padding: 40px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 6px;
-        }
+        .input-with-icon input { padding-left: 40px; }
+        
         input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
+            width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 6px;
+            font-size: 1rem; box-sizing: border-box; transition: border-color 0.2s;
         }
-        input:focus {
-            outline: none;
-            border-color: var(--blue-primary);
-            box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
-        }
-        #payment-element {
-            margin-bottom: 24px;
-        }
-        .terms {
-            display: flex;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        .terms input {
-            width: auto;
-            margin-right: 10px;
-        }
-        .terms label {
-            font-size: 0.85rem;
-            color: var(--gray-medium);
-            margin-bottom: 0;
-        }
-        .terms a {
-            color: var(--blue-primary);
-            text-decoration: none;
-        }
-        .terms a:hover {
-            text-decoration: underline;
-        }
+        input:focus { outline: none; border-color: var(--blue-primary); box-shadow: 0 0 0 2px rgba(0,123,255,0.2); }
+        #payment-element { margin-bottom: 24px; }
+        .terms { display: flex; align-items: center; margin-bottom: 24px; }
+        .terms input { width: auto; margin-right: 10px; }
+        .terms label { font-size: 0.85rem; color: var(--gray-medium); margin-bottom: 0; }
+        .terms a { color: var(--blue-primary); text-decoration: none; }
+        .terms a:hover { text-decoration: underline; }
         button {
-            width: 100%;
-            padding: 14px;
-            background-color: var(--blue-primary);
-            color: white;
-            border: none;
+            width: 100%; padding: 14px; background-color: var(--blue-primary); color: white; border: none;
+            border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s;
+        }
+        button:hover { background-color: var(--blue-hover); }
+        button:disabled { background-color: #a0c7ff; cursor: not-allowed; }
+        .stripe-footer { text-align: center; margin-top: 20px; font-size: 0.8rem; color: var(--gray-medium); }
+        #payment-message { text-align: center; padding: 10px; margin-top: 10px; border-radius: 5px; color: #D8000C; background-color: #FFD2D2; display: none; }
+
+        /* NEW: Styles for the content blocker warning */
+        #blocker-warning {
+            display: none; /* Hidden by default */
+            padding: 15px;
+            background-color: var(--red-warning-bg);
+            border: 1px solid var(--red-warning-border);
             border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        button:hover {
-            background-color: var(--blue-hover);
-        }
-        button:disabled {
-            background-color: #a0c7ff;
-            cursor: not-allowed;
-        }
-        .stripe-footer {
+            color: var(--red-warning-text);
             text-align: center;
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: var(--gray-medium);
-        }
-        #payment-message {
-            text-align: center;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            color: #D8000C; /* Red for errors */
-            background-color: #FFD2D2;
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -165,121 +77,125 @@
     <div class="checkout-container">
         <div class="info-panel">
             <div class="info-header">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
                 <span>La Maison Blanche</span>
             </div>
             <h1>Dépôt de sécurité</h1>
             <div class="amount">CA$500.00</div>
-            <p class="description">
-                Votre dépôt de sécurité vous sera remboursé 5 jours après votre séjour, suite à l'inspection du logement. Voir les conditions plus bas.
-            </p>
+            <p class="description">Votre dépôt de sécurité vous sera remboursé 5 jours après votre séjour, suite à l'inspection du logement. Voir les conditions plus bas.</p>
         </div>
 
         <div class="payment-panel">
+            <div id="blocker-warning">
+                <b>Le formulaire de paiement n'a pas pu charger.</b><br>
+                Veuillez désactiver votre bloqueur de publicité (ad-blocker) ou de contenu pour cette page et la recharger.
+            </div>
+
             <form id="payment-form">
                 <div class="form-group">
-                    <label for="email">Contact details</label>
-                    <input type="email" id="email" placeholder="email@example.com" required>
-                    <input type="text" id="name" placeholder="Full name" style="margin-top: 10px;" required>
+                    <label for="email">Informations de contact</label>
+                    <div class="input-with-icon" style="margin-bottom: 10px;">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.00977 5.50977C3.00977 4.67644 3.67644 4.00977 4.50977 4.00977H19.4902C20.3236 4.00977 20.9902 4.67644 20.9902 5.50977V18.4902C20.9902 19.3236 20.3236 19.9902 19.4902 19.9902H4.50977C3.67644 19.9902 3.00977 19.3236 3.00977 18.4902V5.50977ZM4.50977 2.00977C2.57167 2.00977 1.00977 3.57167 1.00977 5.50977V18.4902C1.00977 20.4283 2.57167 21.9902 4.50977 21.9902H19.4902C21.4283 21.9902 22.9902 20.4283 22.9902 18.4902V5.50977C22.9902 3.57167 21.4283 2.00977 19.4902 2.00977H4.50977ZM12 14.25L5.18701 8.232L3.813 9.768L11.25 16.5H12.75L20.187 9.768L18.813 8.232L12 14.25Z" fill="currentColor"/></svg>
+                        <input type="email" id="email" placeholder="email@example.com" required>
+                    </div>
+                    <div class="input-with-icon">
+                        <svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z" clip-rule="evenodd"/></svg>
+                        <input type="text" id="name" placeholder="Full name" required>
+                    </div>
                 </div>
-                
                 <div class="form-group">
                     <label for="reservation-number">N° de réservation</label>
                     <input type="text" id="reservation-number" placeholder="Doit contenir 8 caractères" minlength="8" maxlength="8" required>
                 </div>
-
-                <label>Payment method</label>
-                <div id="payment-element">
-                    </div>
-
+                <label>Méthode de paiement</label>
+                <div id="payment-element"></div>
                 <div class="terms">
                     <input type="checkbox" id="terms" name="terms" required>
-                    <label for="terms">I agree to La Maison Blanche's <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    <label for="terms">J'accepte la <a href="https://example.com/politique-depot" target="_blank">politique de dépôt</a> de La Maison Blanche et ses tiers.</label>
                 </div>
-
-                <button id="submit">
-                    <span id="button-text">Pay</span>
-                </button>
-
-                <div id="payment-message" class="hidden"></div>
+                <button id="submit"><span id="button-text">Pay</span></button>
+                <div id="payment-message"></div>
             </form>
-            <div class="stripe-footer">Powered by <strong>stripe</strong> | Terms | Privacy</div>
+            <div class="stripe-footer">Powered by <strong>stripe</strong> | <a>Terms</a> | <a>Privacy</a></div>
         </div>
     </div>
 
     <script>
-        // IMPORTANT: Replace with your actual API Gateway URL
-        const BACKEND_URL = 'https://4wusuyt7he.execute-api.us-east-2.amazonaws.com'; 
+        const STRIPE_SECRET_KEY = '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'; // <-- ⚠️ PASTE YOUR STRIPE SECRET KEY HERE
+        const STRIPE_PUBLISHABLE_KEY = 'pk_live_51SEYMBAA2CcQXqlz15YdWYTYmQurzgda37b3QcV2IHddJxUIy9UG0UPW61pDfiaXNaaPymKR7rStg2B1cQInT1Rj00CVDBnZMN';
 
-        // 1. Initialize Stripe
-        const stripe = Stripe('pk_live_51SEYMBAA2CcQXqlz15YdWYTYmQurzgda37b3QcV2IHddJxUIy9UG0UPW61pDfiaXNaaPymKR7rStg2B1cQInT1Rj00CVDBnZMN');
-
-        // 2. Create Payment Elements
+        // NOTE: The 'stripe' and 'stripeAdmin' variables are only defined if the Stripe script loads successfully.
+        // We will check for their existence later.
+        let stripe, stripeAdmin; 
+        if (typeof Stripe !== 'undefined') {
+            stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+            stripeAdmin = Stripe(STRIPE_SECRET_KEY);
+        }
+        
         let elements;
         initialize();
-
         document.querySelector("#payment-form").addEventListener("submit", handleSubmit);
 
-        // Fetches a payment intent and captures the client secret
         async function initialize() {
-            const response = await fetch(BACKEND_URL + '/create-payment-intent', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    // You can pass items or other data here if needed
-                }),
-            });
-            const { clientSecret } = await response.json();
+            if (typeof Stripe === 'undefined') return; // Stop if Stripe is blocked
 
-            const appearance = { theme: 'stripe' };
-            elements = stripe.elements({ appearance, clientSecret });
-            
-            const paymentElement = elements.create("payment");
-            paymentElement.mount("#payment-element");
+            if (!STRIPE_SECRET_KEY || STRIPE_SECRET_KEY === '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') {
+                showMessage("ERREUR: La clé secrète Stripe n'est pas configurée.");
+                return;
+            }
+            try {
+                const paymentIntent = await stripeAdmin.paymentIntents.create({
+                    amount: 50000, currency: 'cad', automatic_payment_methods: { enabled: true },
+                });
+                elements = stripe.elements({ appearance: { theme: 'stripe' }, clientSecret: paymentIntent.client_secret });
+                const paymentElement = elements.create("payment");
+                paymentElement.mount("#payment-element");
+            } catch (error) {
+                console.error("Error creating Payment Intent:", error);
+                showMessage("Erreur d'initialisation du formulaire de paiement.");
+            }
         }
 
-        // 3. Handle form submission
         async function handleSubmit(e) {
             e.preventDefault();
+            if (typeof Stripe === 'undefined') return; // Stop if Stripe is blocked
             setLoading(true);
-
             const { error } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    // Make sure to change this to your payment completion page
-                    return_url: window.location.href.split('?')[0] + 'completion.html',
+                    return_url: window.location.href.split('?')[0] + '?payment_success=true',
                     receipt_email: document.getElementById('email').value,
                 },
             });
-
-            // This point will only be reached if there is an immediate error when
-            // confirming the payment. Otherwise, your customer will be redirected to
-            // your `return_url`.
             if (error.type === "card_error" || error.type === "validation_error") {
                 showMessage(error.message);
             } else {
-                showMessage("An unexpected error occurred.");
+                showMessage("Une erreur inattendue est survenue.");
             }
             setLoading(false);
         }
-
-        // --- UI helpers ---
+        
         function showMessage(messageText) {
             const messageContainer = document.querySelector("#payment-message");
-            messageContainer.classList.remove("hidden");
+            messageContainer.style.display = 'block';
             messageContainer.textContent = messageText;
-            setTimeout(() => {
-                messageContainer.classList.add("hidden");
-                messageContainer.textContent = "";
-            }, 4000);
         }
 
         function setLoading(isLoading) {
             document.querySelector("#submit").disabled = isLoading;
-            document.querySelector("#button-text").textContent = isLoading ? "Processing..." : "Pay";
+            document.querySelector("#button-text").textContent = isLoading ? "Traitement..." : "Pay";
         }
+        
+        // NEW: Detection logic for content blockers
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (typeof Stripe === 'undefined') {
+                    // Stripe.js script was blocked
+                    document.getElementById('payment-form').style.display = 'none';
+                    document.getElementById('blocker-warning').style.display = 'block';
+                }
+            }, 2000); // Wait 2 seconds to give Stripe.js time to load
+        });
     </script>
 </body>
 </html>
