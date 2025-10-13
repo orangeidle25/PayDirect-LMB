@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Bank</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bank-selector-container">
+        <h1>Select Your Financial Institution</h1>
+        <p>Please select your financial institution below to continue with Interac E-Transfer.<br>If your bank is not listed, please pay by card.</p>
+
+        <div class="bank-grid">
+            <a href="#" class="bank-item" data-name="BMO" data-link="https://www1.bmo.com/banking/digital/login">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/BMO_Logo.svg/2560px-BMO_Logo.svg.png" alt="BMO Logo">
+            </a>
+            <a href="#" class="bank-item" data-name="CIBC" data-link="https://www.cibconline.cibc.com/ebm-resources/online-banking/client/index.html#/auth/signon">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/48/CIBC_logo_2021.svg/2560px-CIBC_logo_2021.svg.png" alt="CIBC Logo">
+            </a>
+            <a href="#" class="bank-item" data-name="RBC" data-link="https://secure.royalbank.com/statics/login-service-ui/index#/full/signin">
+                <img src="https://1000logos.net/wp-content/uploads/2018/10/RBC-Logo.png" alt="RBC Logo">
+            </a>
+            <a href="#" class="bank-item" data-name="Scotiabank" data-link="https://auth.scotiaonline.scotiabank.com/online?oauth_key=Gs6G6fodtHM&oauth_key_signature=eyJraWQiOiJrUFVqdlNhT25GWUVDakpjMmV1MXJvNGxnb2VFeXJJb2tCbU1oX3BiZXNVIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJyZWZlcmVyIjoiaHR0cHM6Ly93d3cuc2NvdGlhYmFuay5jb20vIiwicmFyIjpmYWxzZSwib2F1dGhfa2V5IjoiR3M2RzZmb2R0SE0iLCJjb25zZW50X3JlcXVpcmVkIjpmYWxzZSwicmVkaXJlY3RfdXJpIjoiaHR0cHM6Ly93d3cuc2NvdGlhb25saW5lLnNjb3RpYWJhbmsuY29tL29ubGluZS9sYW5kaW5nL29hdXRobGFuZGluZy5ibnMiLCJleHAiOjE3NjAzMTUyOTUsImlhdCI6MTc2MDMxNDA5NSwianRpIjoiNWZmNjk3MDItYTllMS00YTM4LWJmNmEtOTI3YjhiMzI5OWM1IiwiY2xpZW50X2lkIjoiOGVlOTBjMzktMWM1Mi00ZmY0LThhZTYtYTdiNTRjNTM5OTMzIiwiY2xpZW50X21ldGFkYXRhIjp7IkNoYW5uZWxJRCI6IlNPTCIsIkFwcGxpY2F0aW9uQ29kZSI6Ikg3In0sImlzc3VlciI6Imh0dHBzOi8vcGFzc3BvcnQuc2NvdGlhYmFuay5jb20ifQ.DmvoyuUdyj-CO-duX-5zIgidYlVbq24JoXe45pQd5P5yssx7XoSPpyXAFOzVuVrVHjeFnZ1-ta7lnn2ra2dhL3KS5NehLzhZE9lt65uOkjDK7YGuLtvzGPwNaI4VmKu_Ocbqz6aGSdIy1FVDXJcyuv0N8hCnRXdxlk12k2KxbwkHzC7imfruW4bppQB0_JbHNUC8cOmQQWsLFXVHKgYUe75kLSGGGsVgZgDuPlX_7PampSzG6tDH54FXjWqdnFx88N9IARRolPVyoG_t_piLX8bxgIcdJvgrxMjTmRZld34QQ7JbENZUpwvAbtBDx6JoF07Bsu9Z9WtZeaCctwTgcA&preferred_environment=">
+                <img src="https://logos-world.net/wp-content/uploads/2021/03/Scotiabank-Logo.png" alt="Scotiabank Logo">
+            </a>
+            <a href="#" class="bank-item" data-name="TD" data-link="https://authentication.td.com/uap-ui/?consumer=easyweb&locale=en_CA#/uap/login">
+                <img src="https://cdn.worldvectorlogo.com/logos/td-bank-1.svg" alt="TD Logo">
+            </a>
+            <a href="#" class="bank-item" data-name="National Bank" data-link="https://connexion.bnc.ca/?SAMLRequest=fZJPT%2BMwEMW%2FSuR7EttlSWo1RRUVUiUWIf7sYW%2BuOwVDMjYeu4Vvjwl0VQ7sdfTmvTc%2Fe3b2OvTFDgJZhx0TFWcFoHEbiw8du7%2B7KFt2Np%2BRHnrp1SLFR7yBlwQUiwURhJjXzh1SGiDcQthZA%2Fc3lx17jNGTqmtcm8o9R10ZN9RErh6dau609NoLL3j%2F8HS1aqVvWLHMthZ1HKscHIxDhNc8qtZoKqNZceGCgbFKx7a6J2DFatkxuylPpq1shWimUgjeNpI3Qk5OJ6di2kyyiCjBCilqjB2TXP4qBS%2FF5I5zJbjiJ1XT8r%2Bs%2BHOgIT9oZD5I6hNAx1JA5TRZUqgHIBWNul38vlRZqnxw0RnXsy9eagwMxw7%2FN9AHomx%2BuH6%2F3x%2FxG9nRJ%2BYyx%2B3sBkJN3pv18%2FYlxbekMSRIw25WH1f494BXOXO1vHa9NW8fHAcdf64kKjFOMtjtKFUJyYOxWwsbVs%2B%2FMr5%2Fi%2Fk7&RelayState=%252Foauth2%252Fv1%252Fauthorize%252Fredirect%253Fokta_key%253Dd484oSh6yXaQtGWzh8L7Nd0rZXj9EGvVQFhGDCLCXng&SigAlg=http%3A%2F%2Fwww.w3.org%2F2001%2F04%2Fxmldsig-more%23rsa-sha256&Signature=OBwSH0VAYNFs1Gb09CcqSwEWXjfnUEtaoP3fxujuG9XqNDwYfkLJOe7hk1RJjdLjv4pweiNC6RPz6GpLrfubrKeYhccHeapqOQ424vcq8B1Da2OEClJ9TBF6vPX58DdPSNTBHjO58R%2FegKSAi9qZS1pO42OCQrcFK4XMuTkQsc9Arvi5PUdLDByEkRwPh1NQSnzKZTGNgcbPSGEtU7PHeYBpi7DACPn4Oq7nsoMTiLa8UpwhMYBDD9XURVYqvN65qQt0C8XOLJsuh%2FHkNAgw1GPa5Ugq0QGTwpFZC8hAPh1yHsKUBCexXWVhgfJZFDNQzbt3ahtHgbFeS9guEI7qqA%3D%3D">
+                <img src="https://upload.wikimedia.org/wikipedia/fr/a/ad/Banque_nationale_du_Canada_Logo.png" alt="National Bank Of Canada Logo">
+            </a>
+            <a href="#" class="bank-item" data-name="Desjardins" data-link="https://accweb.mouv.desjardins.com/identifiantunique/securite-garantie/authentification/auth/manuel">
+                <img src="https://www.desjardins.com/content/dam/images/logos/commun/logo-desjardins-couleur.png" alt="Desjardins Logo">
+            </a>
+            <a href="#" class="bank-item" data-name="Tangerine" data-link="https://www.tangerine.ca/app/#/login/login-id?locale=en_CA">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL0D-cV1Y-J8iHQKXExUU6oeAPnX6fQKFWbA&s" alt="Tangerine Logo">
+            </a>
+        </div>
+    </div>
+    
+    <div id="popup-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button id="close-modal" class="close-button">&times;</button>
+            <h2 id="modal-title">Interac e-Transfer Instructions</h2>
+            <p>Please make an Interac E-Transfer with the following details:</p>
+            <div class="transfer-details">
+                <div class="detail-item">
+                    <span>Recipient:</span>
+                    <strong>info@lamaisonblanche.ca</strong>
+                </div>
+                <div class="detail-item">
+                    <span>Amount:</span>
+                    <strong>$500.00 CAD</strong>
+                </div>
+                <div class="detail-item">
+                    <span>Method:</span>
+                    <strong>Autodeposit</strong>
+                </div>
+            </div>
+            <a href="#" id="modal-bank-link" class="btn-primary" target="_blank">Access Bank Portal</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
