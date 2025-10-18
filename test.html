@@ -229,10 +229,9 @@
                     return;
                 }
                 
-                const email = emailField.value; // Get the client's email
+                const email = emailField.value;
                 const phoneNumber = phoneInput.getNumber();
                 
-                // 1. Create PaymentIntent on your server
                 let clientSecret;
                 try {
                     const workerUrl = 'https://stripe-worker.cruise-jacob-ca.workers.dev';

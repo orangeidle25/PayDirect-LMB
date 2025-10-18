@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dépôt de sécurité - Paiement</title>
+    <title>Security Deposit Checkout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeFH-grAAAAAO7A1bULu8X4s86HHts4BgWlf9nJ"></script>
-
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f6f9fc; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; color: #333; }
         .checkout-container { display: flex; width: 100%; max-width: 900px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); overflow: hidden; }
@@ -44,9 +43,9 @@
         .order-summary { flex: 4; background-color: #f6f9fc; padding: 40px; border-left: 1px solid #e6ebf1; }
         .order-item, .order-total { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 1rem; }
         .order-total { border-top: 1px solid #e6ebf1; padding-top: 15px; margin-top: 15px; font-weight: 700; }
-        .language-selector { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-align: center; }
-        .language-selector a { color: black; text-decoration: none; padding: 0 5px; }
-        .language-selector a.active { text-decoration: underline; }
+        .language-selector { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-align: center; } /* <-- MODIFIED CLASS */
+        .language-selector a { color: black; text-decoration: none; padding: 0 5px; } /* <-- MODIFIED CLASS */
+        .language-selector a.active { text-decoration: underline; } /* <-- MODIFIED CLASS */
         @media (max-width: 768px) {
             .checkout-container { flex-direction: column-reverse; }
             .payment-details, .order-summary { padding: 25px; }
@@ -54,53 +53,52 @@
     </style>
 </head>
 <body>
-    <div class="language-selector">
-        <a href="en">English</a> <a href="#" class="active">Français</a>
-    </div>
+        <div class="language-selector"> <a href="#" class="active">English</a><a href="fr">Français</a>
+        </div>
     <div class="checkout-container">
         <div class="payment-details">
             <div class="payment-header">
-                <div class="company-name">Dépôt de sécurité</div>
-                <div class="amount">Payer 500 $ CA</div>
+                <div class="company-name">Security Deposit</div>
+                <div class="amount">Pay CA$500</div>
             </div>
 
-            <a href="interac-e-transferFR.html" class="interac-btn">
+            <a href="interac-e-transfer.html" class="interac-btn">
                  <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Interac_Brand_2021.png" width="25" height="25">
                  E-Transfer
             </a>
 
             <div class="separator">
-                <span class="separator-text">Ou payer par carte</span>
+                <span class="separator-text">Or pay with card</span>
             </div>
             
             <form id="payment-form">
-                <p style="font-size: 1.1rem; font-weight: 600; margin-top:0; margin-bottom: 15px;">Coordonnées</p>
+                <p style="font-size: 1.1rem; font-weight: 600; margin-top:0; margin-bottom: 15px;">Contact details</p>
                 
                 <div class="contact-form-container" id="contact-form-container">
                     <div class="form-group">
-                        <span class="tooltip-text">Entrez une adresse courriel</span>
+                        <span class="tooltip-text">Enter an email address</span>
                         <span class="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         </span>
                         <input type="email" id="email" class="form-control" placeholder=" " required>
-                        <label for="email" class="placeholder-label">courriel@exemple.com</label>
+                        <label for="email" class="placeholder-label">email@example.com</label>
                         <span class="error-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                         </span>
                     </div>
                     <div class="form-group">
-                         <span class="tooltip-text">Entrez votre nom complet</span>
+                         <span class="tooltip-text">Enter your full name</span>
                         <span class="icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                         </span>
                         <input type="text" id="full-name" class="form-control" placeholder=" " required>
-                        <label for="full-name" class="placeholder-label">Nom complet</label>
+                        <label for="full-name" class="placeholder-label">Full name</label>
                         <span class="error-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                         </span>
                     </div>
                     <div class="form-group">
-                        <span class="tooltip-text">Entrez un numéro de téléphone valide</span>
+                        <span class="tooltip-text">Enter a valid phone number</span>
                         <input type="tel" id="phone" class="form-control" required>
                         <span class="error-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
@@ -108,13 +106,12 @@
                     </div>
                 </div>
                 <p class="country-text">
-                    Vous devez entrer votre indicatif de pays.
+                    You must enter your country code.
                 </p>
 
                 <div id="error-message" class="error-message"></div>
 
-                <button id="submit" class="submit-btn">Payer</button>
-                
+                <button id="submit" class="submit-btn">Pay</button>
                 <p class="footer-text">
                     Propulsé par <strong>AWS</strong>
                 </p>
@@ -123,11 +120,11 @@
 
         <div class="order-summary">
             <div class="order-item">
-                <span>Vous serez entièrement remboursé 5 jours après votre séjour, une fois l'inspection terminée.<br><br><a href="https://lamaisonblanche.ca/terms-depot" style="text-decoration: underline; color: black;">Conditions du dépôt</a><br><br>La Maison Blanche<br>info@lamaisonblanche.ca<br>(514) 994-2080</span>
+                <span>You will be fully refunded 5 days after your stay, after an inspection is complete.<br><br><a href="https://lamaisonblanche.ca/terms-depot" style="text-decoration: underline; color: black;">Deposit Conditions</a><br><br>La Maison Blanche<br>info@lamaisonblanche.ca<br>(514) 994-2080</span>
             </div>
             <div class="order-total">
                 <span>Total</span>
-                <span>500,00 $ CA</span>
+                <span>CA$500.00</span>
             </div>
         </div>
     </div>
@@ -169,13 +166,13 @@
                 formContainer.classList.remove('invalid');
                 if (field === emailField) {
                     isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value);
-                    if (field.value && !isValid) errorText = 'Votre courriel est incomplet.';
+                    if (field.value && !isValid) errorText = 'Your email is incomplete.';
                 } else if (field === nameField) {
                     isValid = field.value.trim() !== '';
-                    if (!isValid && document.activeElement !== field) errorText = 'Veuillez entrer votre nom complet.';
+                    if (!isValid && document.activeElement !== field) errorText = 'Please enter your full name.';
                 } else if (field === phoneInputField) {
                     isValid = phoneInput.isValidNumber();
-                    if (field.value && !isValid) errorText = 'Veuillez entrer un numéro de téléphone valide.';
+                    if (field.value && !isValid) errorText = 'Please enter a valid phone number.';
                 }
                 if (!isValid && errorText) {
                     formContainer.classList.add('invalid');
@@ -191,12 +188,12 @@
                 event.preventDefault();
                 const isFormValid = allFields.map(field => validateField(field)).every(status => status === true);
                 if (!isFormValid) {
-                    console.log("Le formulaire est invalide. Veuillez vérifier les champs.");
+                    console.log("Form is invalid. Please check the fields.");
                     return;
                 }
                 const email = emailField.value;
                 const phoneNumber = phoneInput.getNumber();
-                const stripeUrl = `https://buy.stripe.com/aFa6oGch368X6py6sR0Ba01?locked_prefilled_email=${email}&utm_source=${email}&locale=fr-CA`;
+                const stripeUrl = `https://buy.stripe.com/aFa6oGch368X6py6sR0Ba01?locked_prefilled_email=${email}&utm_source=${email}&locale=en`;
                 window.location.href = stripeUrl;
             });
         });
