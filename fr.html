@@ -6,8 +6,7 @@
     <title>Dépôt de sécurité - Paiement</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LeFH-grAAAAAO7A1bULu8X4s86HHts4BgWlf9nJ"></script>
-
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f6f9fc; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; color: #333; }
         .checkout-container { display: flex; width: 100%; max-width: 900px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); overflow: hidden; }
@@ -110,14 +109,15 @@
                 <p class="country-text">
                     Vous devez entrer votre indicatif de pays.
                 </p>
-
+                    <div 
+                        class="cf-turnstile" 
+                        data-sitekey="0x4AAAAAAB7YL0A6I0vsv12D"
+                        data-theme="light" 
+                        data-size="normal"
+                        >
+                    </div>
                 <div id="error-message" class="error-message"></div>
-
                 <button id="submit" class="submit-btn">Payer</button>
-                
-                <p class="footer-text">
-                    Propulsé par <strong>AWS</strong>
-                </p>
             </form>
         </div>
 
