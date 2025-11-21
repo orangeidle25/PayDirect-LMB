@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preparing for your stay at La Maison Blanche</title>
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .header {
+        text-align: center;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eeeeee;
+    }
+    .header h1 {
+        color: #2c3e50;
+        margin: 0;
+        font-size: 2em;
+    }
+    .content-section {
+        padding: 25px 5px;
+        border-bottom: 1px solid #eeeeee;
+    }
+    .content-section:last-child {
+        border-bottom: none;
+    }
+    .content-section h2 {
+        color: #2c3e50;
+        font-size: 1.4em;
+        margin-top: 0;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+    .icon {
+        width: 28px;
+        height: 28px;
+        vertical-align: middle;
+        margin-right: 15px;
+        stroke-width: 1.5;
+    }
+    .text-content p {
+        line-height: 1.6;
+        font-size: 1.05em;
+        color: #555;
+    }
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+        font-size: 1.1em;
+        background-color: #f9f9f9;
+        padding: 12px;
+        border-radius: 8px;
+    }
+    .info-item span {
+        color: #555555;
+    }
+    .info-item strong {
+        color: #000000;
+        font-weight: 600;
+    }
+    .alert {
+        background-color: #eaf5ff;
+        color: #004085;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+        text-align: center;
+        border-left: 5px solid #007bff;
+    }
+    .alert p {
+        margin: 0;
+        font-size: 1.1em;
+    }
+    .alert strong {
+        font-size: 1.3em;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .button-container {
+        text-align: center;
+        margin-top: 25px;
+    }
+    .button {
+        background: #000000;
+        color: #ffffff;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .footer {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 0.9em;
+        color: #888888;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Your stay at La Maison Blanche is approaching, USER!</h1>
+        </div>
+        <div class="alert">
+            <p><strong>Action required</strong></p>
+            <p>Please pay the <strong>$500 CAD</strong> security deposit as soon as possible.</p>
+        </div>
+        <div class="content-section">
+            <h2>
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"></path><path d="M12 12h.01"></path></svg>
+                Security Deposit
+            </h2>
+            <div class="text-content">
+                <p>To finalize your reservation and prepare for your arrival, we require a refundable security deposit. This is a standard procedure. The deposit will be fully refunded to you 5 days after your departure, following an inspection.</p>
+            </div>
+            <div class="button-container">
+                <a href="https://buy.stripe.com/aFa6oGch368X6py6sR0Ba01?locale=en-CA&prefilled_email={{GuestEmail}}&utm_source={{BookingId}}" class="button">Pay Security Deposit</a>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>
+                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                Your Personalized House Guide
+            </h2>
+            <div class="text-content">
+                <p>We have prepared a complete guide to help you make the most of your stay. You will find our personal recommendations for the best restaurants, can't-miss activities in the area, and a few local secrets!</p>
+            </div>
+            <div class="button-container">
+                <a href="http://docs.lamaisonblanche.ca" class="button">Discover the House Guide</a>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Getting to the House
+            </h2>
+            <div class="text-content">
+                <p>We want your arrival to be as smooth as possible. Use the links below to open the exact location of the house directly in your preferred navigation app.</p>
+            </div>
+            <div class="button-container">
+                <a href="https://maps.apple.com/place?address=933+Rte+Prévost%2C+St-Pierre-de-l%27Île-d%27Orléans+QC+G0A+4E0%2C+Canada&coordinate=46.8716784%2C-71.0927263&name=La+Maison+Blanche" class="button" style="margin: 5px;">Apple Maps</a>
+                <a href="https://www.google.com/maps/place/La+Maison+Blanche/@46.8718026,-71.0952428,17z/data=!3m1!4b1!4m6!3m5!1s0x4cb8bf5eeeec7b03:0x22f443a0a27defaa!8m2!3d46.8718026!4d-71.0926625!16s%2Fg%2F11ymm9vhd5?entry=ttu&g_ep=EgoyMDI1MTExNy4wIKXMDSoASAFQAw%3D%3D" class="button" style="margin: 5px;">Google Maps</a>
+            </div>
+        </div>
+        <div class="content-section">
+            <h2>
+                <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+                Internet Connection
+            </h2>
+            <div class="text-content">
+                <p>To make you feel at home as soon as you arrive, here is the information to connect to our high-speed Wi-Fi network. Stay connected, share your memories, or relax with your favorite streaming service.</p>
+            </div>
+            <div class="info-item">
+                <span>Network Name: <strong>La Maison Blanche</strong></span>
+            </div>
+            <div class="info-item">
+                <span>Password: <strong>Prevost933</strong></span>
+            </div>
+        </div>
+
+
+        <div class="footer">
+            <p>info@lamaisonblanche.ca | +1 (514) 994-2080</p>
+            <p>933, Route Prévost, Saint-Pierre de l'Ile d'Orléans, QC</p>
+            <p>La Maison Blanche</p>
+        </div>
+    </div>
+</body>
+</html>
