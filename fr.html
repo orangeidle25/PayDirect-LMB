@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement du dépôt de garantie</title>
+    <title>Dépôt de sécurité</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
@@ -25,8 +25,8 @@
         .form-row { position: relative; border-bottom: 1px solid #e6e6e6; height: 52px; min-height: 52px; display: flex; align-items: center; background: #fff; }
         .form-row:first-child { border-top-left-radius: 6px; border-top-right-radius: 6px; }
         .form-row:last-child { border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; border-bottom: none; }
-        .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #888; pointer-events: none; z-index: 10; display: flex; align-items: center; justify-content: center; height: 100%; }
-        .form-input { width: 100%; height: 100%; border: none; padding: 0 15px 0 45px; font-size: 16px; outline: none; color: #333; background: transparent; border-radius: 0; line-height: 52px; }
+        .input-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #888; pointer-events: none; z-index: 10; display: flex; align-items: center; justify-content: center; height: 100%; }
+        .form-input { width: 100%; height: 100%; border: none; padding: 0 15px 0 44px; font-size: 16px; outline: none; color: #333; background: transparent; border-radius: 0; line-height: 52px; }
         .form-row:first-child .form-input { border-top-left-radius: 6px; border-top-right-radius: 6px; }
         .form-row:last-child .form-input { border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
         .form-input::placeholder { color: #aab7c4; opacity: 1; }
@@ -39,7 +39,7 @@
         .split-row { display: flex; width: 100%; height: 52px; align-items: stretch; }
         .field-col { position: relative; height: 100%; display: flex; align-items: center; }
         .field-col.big { flex: 2; min-width: 0; }
-        .field-col.small { flex: 1; border-left: 1px solid #e6e6e6; min-width: 0; }
+        .field-col.small { flex: 1; border-left: none; min-width: 0; }
         .submit-btn { width: 100%; padding: 14px; background-color: #000; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 25px; transition: opacity 0.3s ease; }
         .submit-btn:hover { background-color: #333; }
         .submit-btn:disabled { background-color: #555; cursor: not-allowed; opacity: 0.7; }
@@ -51,6 +51,7 @@
         .language-selector a { color: #333; text-decoration: none; margin: 0 5px; font-size: 0.9rem; }
         .language-selector a.active { text-decoration: underline; }
         .country-text { font-size: 0.85rem; color: #666; margin-top: 12px; line-height: 1.4; }
+        .card-brand-logo { height: 26px; width: auto; display: block; transition: opacity 0.3s ease-in-out; opacity: 1; }
         @media (max-width: 768px) {
             .checkout-container { flex-direction: column-reverse; overflow: visible; }
             .payment-details, .order-summary { padding: 25px; }
@@ -58,13 +59,13 @@
     </style>
 </head>
 <body>
-    <div class="language-selector"> <a href="en.html">English</a><a href="fr.html" class="active">Français</a></div>
+    <div class="language-selector"> <a href="en.html" class="active">English</a><a href="fr.html">Français</a></div>
     
     <div class="checkout-container">
         <div class="payment-details">
             <div class="payment-header">
-                <div class="company-name">Dépôt de garantie</div>
-                <div class="amount">500,00 $ CA</div>
+                <div class="company-name">Dépôt de sécurité</div>
+                <div class="amount">500.00 $CA</div>
             </div>
 
             <form id="payment-form">
@@ -74,7 +75,7 @@
                         <span class="input-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         </span>
-                        <input type="email" id="email" class="form-input" placeholder="courriel@exemple.com" required>
+                        <input type="email" id="email" class="form-input" placeholder="email@example.com" required>
                     </div>
 
                     <div class="form-row">
@@ -91,9 +92,9 @@
                     <div class="form-row split-row">
                         <div class="field-col big">
                             <span class="input-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                                <img id="card-brand-icon" src="logo1.png" alt="Card" class="card-brand-logo">
                             </span>
-                            <input type="text" id="number" class="form-input" placeholder="Numéro de carte" inputmode="numeric" maxlength="19" required>
+                            <input type="text" id="number" class="form-input" placeholder=" Numéro de carte" inputmode="numeric" maxlength="19" required>
                         </div>
 
                         <div class="field-col small">
@@ -101,13 +102,13 @@
                         </div>
 
                         <div class="field-col small">
-                            <input type="text" id="code" class="form-input no-icon" placeholder="CVC" maxlength="3" required>
+                            <input type="text" id="code" class="form-input no-icon" placeholder="CVC" maxlength="4" required>
                         </div>
                     </div>
                     </div>
 
                 <p class="country-text">
-                    Ceci est une retenue temporaire. Les fonds seront libérés dans les 5 jours suivant le départ, sous réserve d'inspection.
+                    Ceci est une pré-authorization. 
                 </p>
 
                 <iframe 
@@ -122,23 +123,22 @@
 
                 <div id="error-message" class="error-message"></div>
 
-                <button id="submit" type="submit" class="submit-btn">Payer</button>
+                <button id="submit" type="submit" class="submit-btn">Pay</button>
             </form>
         </div>
 
         <div class="order-summary">
             <div class="order-item">
-                <p>Vous serez intégralement remboursé 5 jours après votre séjour, suite à une inspection.</p>
-                <p><a href="https://lamaisonblanche.ca/terms-depot" style="color: #333; text-decoration: underline;">Conditions du dépôt</a></p>
+                <p>Vous allez être remboursé 5 jours après votre séjour, suite à une inspection.</p>
+                <p><a href="https://lamaisonblanche.ca/terms-depot" style="color: #333; text-decoration: underline;">Deposit Conditions</a></p>
                 <p>La Maison Blanche<br>info@lamaisonblanche.ca<br>(514) 994-2080</p>
             </div>
             <div class="order-total">
                 <span>Total</span>
-                <span>500,00 $ CA</span>
+                <span>CA$500.00</span>
             </div>
         </div>
     </div>
-    <script src="https://js.qads.cloud/lib/pay-v3.js" type="module"></script>
     <script src="index.js"></script>
 </body>
 </html>
