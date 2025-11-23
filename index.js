@@ -210,9 +210,9 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data.result === "success") {
-                submitBtn.textContent = "Authorized ✔";
+                submitBtn.textContent = "✔";
                 submitBtn.style.backgroundColor = "#4CAF50";
-                alert("Hold authorized successfully!");
+                alert("Confirmed/Confirmé!");
                 form.reset();
                 startLogoAnimation(); 
                 cvcInput.setAttribute('maxlength', '4');
