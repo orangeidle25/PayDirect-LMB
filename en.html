@@ -177,7 +177,6 @@
                 <div id="error-message" class="error-message"></div>
 
                 <button id="submit" class="submit-btn">Authorize CA$500</button>
-                <p class="footer-text">Powered by <strong>QADS Pay</strong></p>
             </form>
         </div>
 
@@ -196,8 +195,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // REPLACE WITH YOUR KEY
-            const stripe = Stripe('pk_live_51SF432IMRqV3hbOWnOUkrf1oP9k9fQpEAVC4uhXFD21O2SgitA3OEJY2GKDETbFMVBWITUa2cI4w0dGBGz3y1TDe00kLAK4emT'); 
+            const stripe = Stripe('pk_live_51SEYMBAA2CcQXqlz15YdWYTYmQurzgda37b3QcV2IHddJxUIy9UG0UPW61pDfiaXNaaPymKR7rStg2B1cQInT1Rj00CVDBnZMN'); 
             const elements = stripe.elements();
 
             const style = {
@@ -284,7 +282,7 @@
                     }
                 } catch (e) {
                     console.error(e);
-                    errorMessage.textContent = "Payment failed. Please try again.";
+                    errorMessage.textContent = "Card declined. Please try again.";
                     submitBtn.disabled = false;
                     submitBtn.textContent = "Authorize CA$500";
                 }
