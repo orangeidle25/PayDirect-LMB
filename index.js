@@ -1,3 +1,4 @@
+// Developped by QADS.cloud
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfT99YDBS-n8tOFdjNFeAcm_kFIVaeGcESQ39lgWw7rWebv6DUnEi2tWHqHtNJ4jfiNA/exec";
 
         document.addEventListener('DOMContentLoaded', function () {
