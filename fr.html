@@ -10,7 +10,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/13.11.0/validator.min.js"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const submitBtns = document.querySelectorAll('button[type="submit"], input[type="submit"]');
+            submitBtns.forEach(btn => btn.disabled = true);
+        });
+        window.addEventListener("message", function(event) {
+            if (event.data.action === "QADS_VERIFY_SUCCESS") {
+                const submitBtns = document.querySelectorAll('button[type="submit"], input[type="submit"]');
+                submitBtns.forEach(btn => btn.disabled = false);
+            }
+        });
+    </script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f6f9fc; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; color: #333; }
         * { box-sizing: border-box; }
