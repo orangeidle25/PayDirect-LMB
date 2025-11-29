@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Developped by QADS.cloud -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Deposit Policy ($500 CAD)</title>
+    <style>
+        :root {
+            --primary: #111827;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+            --green: #10b981;
+            --red: #dc2626;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f1f5f9;
+            color: #374151;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .layout {
+            display: block;
+            min-height: 100vh;
+        }
+
+        .content {
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        header h1 { color: var(--dark); margin-bottom: 0.5rem; font-size: 2.2rem; }
+        header .subtitle { color: #6b7280; font-size: 1.2rem; font-weight: 300; }
+        
+        hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+        section { margin-bottom: 4rem; scroll-margin-top: 2rem; }
+        
+        h2 { 
+            color: var(--dark); 
+            margin-bottom: 1.5rem; 
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        p, li { font-size: 1.05rem; }
+        ul { margin-bottom: 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+
+        .alert-box {
+            background-color: #f3f4f6;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+            color: var(--dark);
+        }
+
+        .comparison-table {
+            display: flex;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .comparison-table .col {
+            flex: 1;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+
+        .comparison-table h3 { margin-top: 0; font-size: 1.1rem; color: var(--dark); }
+        .green { color: var(--green); font-weight: bold; }
+        .red { color: var(--red); font-weight: bold; }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .event {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+        }
+
+        .event .icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px auto;
+            color: var(--primary);
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            font-weight: bold;
+        }
+
+        .event .info strong { display: block; margin-bottom: 5px; color: var(--dark); }
+        .event .info { font-size: 0.9rem; color: #6b7280; }
+
+        .calc-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .calc-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+        }
+        
+        .flatpickr-input {
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            color: var(--dark);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: border-color 0.2s;
+            background-color: white;
+            width: 100%; 
+            box-sizing: border-box;
+        }
+
+        .flatpickr-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+        }
+
+        button.calc-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        button.calc-btn:hover { background-color: #374151; }
+
+        .hidden { display: none; }
+        
+        #result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0fdf4;
+            color: #059669;
+            border-radius: 6px;
+            font-weight: 500;
+            border: 1px solid #d1fae5;
+        }
+
+        @media (max-width: 900px) {
+            .content { margin: 0 auto; padding: 2rem; }
+            .comparison-table { flex-direction: column; }
+            
+            .timeline { flex-direction: column; gap: 2rem; }
+            .timeline::before { 
+                top: 0; bottom: 0; left: 24px; width: 2px; height: 100%; right: auto; 
+            }
+            .event { display: flex; text-align: left; align-items: center; gap: 1.5rem; }
+            .event .icon { margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout">
+        <main class="content">
+            <header>
+                <h1>Security Deposit Policy ($500 CAD)</h1>
+                <p class="subtitle">Know more on the security deposit and payment details. <br>We support Visa, Mastercard, American Express and UnionPay.</p>
+            </header>
+
+            <hr>
+
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>To ensure the safety of the property and maintain high standards for all guests, a security deposit of <strong>$500 CAD</strong> is required. This system utilizes a <strong>Pre-Authorization</strong> method rather than a direct charge.</p>
+                
+                <div class="alert-box">
+                    <strong>Key Distinction:</strong> This is <em>not</em> a purchase. The money is simply "locked" in your account. It does not leave your bank unless damages are found.
+                </div>
+            </section>
+
+            <section id="validation">
+                <h2>1. Initial Card Validation and Delayed Check</h2>
+                <p>When you first add your payment method, an initial check ensures the card format is valid. <strong>A couple of hours later</strong>, a secondary validity check is performed.</p>
+                <ul>
+                    <li><strong>The Action:</strong> The secondary check verifies the card is active and not expired.</li>
+                    <li><strong>Important:</strong> If the secondary check reveals the card is <strong>invalid</strong>, we will immediately send an email notification to the customer requiring a replacement payment method. If the payment cannot be completed, the reservation will be cancelled. </li>
+                </ul>
+            </section>
+
+            <section id="authorization">
+                <h2>2. The "Hold" (Pre-Authorization)</h2>
+                <p>Approximately 24 hours prior to check-in, the system initiates the actual hold. This is the <strong>Pre-Authorization event</strong>.</p>
+                
+                <div class="comparison-table">
+                    <div class="col">
+                        <h3>Standard Purchase</h3>
+                        <p class="red">Money leaves account immediately.</p>
+                        <p>Appears as a "Debit" or "Purchase" on your bank statement.</p>
+                    </div>
+                    <div class="col">
+                        <h3>Our Deposit (Hold)</h3>
+                        <p class="green">Money stays in account but is frozen.</p>
+                        <p>Appears as "Pending," "Auth," or "Hold" on your bank statement.</p>
+                    </div>
+                </div>
+
+                <p style="font-size: 0.9rem; color: #6b7280;"><em><strong>Note on Credit Limits:</strong> While the money is not taken, the $500 CAD is deducted from your available credit limit for the duration of the stay.</em></p>
+            </section>
+
+            <section id="release">
+                <h2>3. Inspection & Release Window</h2>
+                <p>The hold is automatically scheduled for release <strong>5 days after your stay</strong>, strictly subject to a property inspection.</p>
+                
+                <div class="timeline">
+                    <div class="event">
+                        <div class="icon">1</div>
+                        <div class="info"><strong>Check-out</strong><br>Guest departs property.</div>
+                    </div>
+                    <div class="event">
+                        <div class="icon">2</div>
+                        <div class="info"><strong>Inspection</strong><br>Staff inspects for damages (Days 1-4).</div>
+                    </div>
+                    <div class="event">
+                        <div class="icon">3</div>
+                        <div class="info"><strong>Funds Released</strong><br>Hold lifted on Day 5 (if clean).</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>
